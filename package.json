@@ -1,0 +1,9 @@
+{
+  "name": "syntax-highlighter",
+  "version": "0.0.1",
+  "dependencies": {},
+  "scripts": {
+    "test": "make test"
+  }
+
+}
