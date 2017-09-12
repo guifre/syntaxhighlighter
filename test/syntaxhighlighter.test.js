@@ -153,6 +153,30 @@ describe('whenMultupleCodeBlocks_thenExpectedCodeGenerated', function () {
     );
 });
 
+describe('whenCodeHasUrl_thenExpectedCodeGenerated', function () {
+    new whenCodeHighlighted(
+        '<body><code>http://alpha.com/bravo</code></body>'
+    ).thenExpectedCodeBuilt(
+        '<code><span class="blue">http://alpha.com/bravo</span></code>'
+    );
+});
+
+describe('whenCodeHasIp_thenExpectedCodeGenerated', function () {
+    new whenCodeHighlighted(
+        '<body><code>10.10.10.10</code></body>'
+    ).thenExpectedCodeBuilt(
+        '<code><span class="blue">10.10.10.10</span></code>'
+    );
+});
+
+describe('whenCodeHasIp_thenExpectedCodeGenerated', function () {
+    new whenCodeHighlighted(
+        '<body><code>10.10.10.10:8080</code></body>'
+    ).thenExpectedCodeBuilt(
+        '<code><span class="blue">10.10.10.10:8080</span></code>'
+    );
+});
+
 function whenCodeHighlighted(code)
 {
     const {document} = (new JSDOM(code)).window;

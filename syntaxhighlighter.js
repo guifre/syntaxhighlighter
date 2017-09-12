@@ -4,6 +4,7 @@ var TOKEN_TYPE = {
     WHITE_SPACE: "white space",
     OTHER: "other"
 };
+
 var PARSER_STATE = {
     CONSUMING_TOKENS: {},
     CONSUMING_STRING: {}
@@ -17,7 +18,6 @@ var Token = class Token {
     }
 };
 
-
 var Highlighter = class Highlighter {
         constructor()
         {
@@ -26,6 +26,12 @@ var Highlighter = class Highlighter {
                 "blue": ["None", "True", "abstract", "and", "as", "assert", "auto", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "def", "default", "del", "delete", "do", "double", "elif", "else", "enum", "except", "export", "extends", "extern", "false", "final", "finally", "float", "for", "from", "function", "global", "goto", "if", "implements", "import", "in", "inline", "instanceof", "int", "interface", "is", "lambda", "let", "long", "native", "new", "nonlocal", "not", "null", "or", "package", "pass", "private", "protected", "public", "raise", "register", "restrict", "return", "short", "signed", "sizeof", "static", "strictfp", "struct", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typedef", "typeof", "union", "unsigned", "var", "void", "volatile", "while", "with", "yield"],
                 "green": ["in", "is", "up"]
             };
+
+            this.regexes = [
+                "[a-z0-9]+://[a-zA-Z0-9-./]+[^\\s]*",
+                "\\d+\\.\\d+\\.\\d+\\.\\d+:\\d+",
+                "\\d+\\.\\d+\\.\\d+\\.\\d+"
+            ];
         }
 
         run(document)
@@ -147,6 +153,13 @@ var Highlighter = class Highlighter {
 
     highlight(token)
     {
+        for (var regex in this.regexes)
+        {
+            if (token.node.match(this.regexes[regex]))
+            {
+                return "<span class='blue'>" + token.node + "</span>";
+            }
+        }
         for (var color in this.highlightedKeywords)
             {
                 for (var keyword in this.highlightedKeywords[color])
