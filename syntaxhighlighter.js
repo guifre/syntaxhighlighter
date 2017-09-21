@@ -22,7 +22,7 @@ var Highlighter = class Highlighter {
         constructor()
         {
             this.highlightedKeywords = {
-                "red": ["$", ">"],
+                "red": ["$", ">", "awk", "aspell", "cron", "gawk", "like", "pro", "rpm", "ssh", "similar", "snort", "top", "alias", "apt", "awk", "bzip2", "cat", "cd", "chmod", "chown", "cmp", "comm", "cp", "cpio", "date", "declare", "df", "echo", "enable", "env", "eval", "exec", "exit", "expect", "export", "find", "for", "free", "ftp", "gawk", "grep", "gzip", "ifconfig", "ifdown", "ifup", "kill", "less", "lft", "ln", "locate", "ls", "man", "mc", "mkdir", "more", "mv", "mysql", "neat", "netconfig", "netstat", "nslookup", "od", "passwd", "ping", "ps", "pwd", "read", "rm", "rsync", "screen", "sdiff", "sed", "shutdown", "slocate", "sort", "ssh", "su", "sudo", "tail", "tar", "top", "tr", "traceroute", "uname", "uniq", "unzip", "vi", "vim", "vmstat", "wc", "wget", "whatis", "whereis", "while", "whoami", "yum"],
                 "blue": ["None", "True", "abstract", "and", "as", "assert", "auto", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "def", "default", "del", "delete", "do", "double", "elif", "else", "enum", "except", "export", "extends", "extern", "false", "final", "finally", "float", "for", "from", "function", "global", "goto", "if", "implements", "import", "in", "inline", "instanceof", "int", "interface", "is", "lambda", "let", "long", "native", "new", "nonlocal", "not", "null", "or", "package", "pass", "private", "protected", "public", "raise", "register", "restrict", "return", "short", "signed", "sizeof", "static", "strictfp", "struct", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typedef", "typeof", "union", "unsigned", "var", "void", "volatile", "while", "with", "yield"],
                 "green": ["in", "is", "up"]
             };
@@ -48,6 +48,7 @@ var Highlighter = class Highlighter {
 
                 var newInnerHtml = "";
                 var state = PARSER_STATE.CONSUMING_TOKENS;
+                var code = "";
                 for (var i = 0; i < tokens.length; i++)
                 {
                     var token = tokens[i];
@@ -59,7 +60,7 @@ var Highlighter = class Highlighter {
                             {
                                 case TOKEN_TYPE.STRING_DELIMITER:
                                     state = PARSER_STATE.CONSUMING_STRING;
-                                    newInnerHtml += "<span class='green'>" + this.highlight(token);
+                                    code += token.node;
                                     break;
 
                                 case TOKEN_TYPE.OTHER:
@@ -81,20 +82,22 @@ var Highlighter = class Highlighter {
 
 
                         case PARSER_STATE.CONSUMING_STRING:
+
+                            code += token.node;
                             switch (token.type)
                             {
                                 case TOKEN_TYPE.STRING_DELIMITER:
                                     state = PARSER_STATE.CONSUMING_TOKENS;
-                                    newInnerHtml += token.node + "</span>";
+                                    newInnerHtml += "<span class='green'>"  + code + "</span>";
+                                    code = '';
                                     break;
 
                                 default:
-                                    newInnerHtml += token.node;
                                     break;
                             }
                     }
                 }
-                codeBlocks[blocksIndex].innerHTML = newInnerHtml;
+                codeBlocks[blocksIndex].innerHTML = newInnerHtml + code;
             }
 
         }

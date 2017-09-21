@@ -177,6 +177,14 @@ describe('whenCodeHasIp_thenExpectedCodeGenerated', function () {
     );
 });
 
+describe('whenSingleQuote_thenExpectedCodeGenerated', function () {
+    new whenCodeHighlighted(
+        '<body><code>foo\'bar</code></body>'
+    ).thenExpectedCodeBuilt(
+        '<code>foo\'bar</code>'
+    );
+});
+
 function whenCodeHighlighted(code)
 {
     const {document} = (new JSDOM(code)).window;
