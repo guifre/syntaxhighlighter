@@ -10,7 +10,7 @@ test:
    echo Ending test
 
 test-w:
-  @NODE_ENV=test mocha  test_syntaxhighlighter.js \
+  @NODE_ENV=test mocha  test.js \
     --reporter $(REPORTER) \
     --growl \
     --watch
