@@ -3,14 +3,14 @@ REPORTER = dot
 test:
    clear
    echo Starting test *********************************************************
-   ./node_modules/mocha/bin/mocha \
+   mocha \
    --reporter $(REPORTER) \
    $(MOCHA_OPTS) \
-   test/*.js
+   *.js
    echo Ending test
 
 test-w:
-  @NODE_ENV=test ./node_modules/.bin/mocha  test/syntaxhighlighter.test.js \
+  @NODE_ENV=test mocha  test_syntaxhighlighter.js \
     --reporter $(REPORTER) \
     --growl \
     --watch

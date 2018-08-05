@@ -52,7 +52,7 @@ describe('whenCodeBlockWithInterestingKeywordAndExtraWords_thenExpectedCodeGener
     new whenCodeHighlighted(
         '<body><code>alpha in bravo</code></body>'
     ).thenExpectedCodeBuilt(
-        '<code>alpha <span class="blue">in</span> bravo</code>'
+        '<code>alpha&nbsp;<span class="blue">in</span>&nbsp;bravo</code>'
     );
 });
 
@@ -60,7 +60,7 @@ describe('whenHighlightedWordIsFirstWord_thenExpectedCodeGenerated', function ()
     new whenCodeHighlighted(
         '<body><code>in alpha</code></body>'
     ).thenExpectedCodeBuilt(
-        '<code><span class="blue">in</span> alpha</code>'
+        '<code><span class="blue">in</span>&nbsp;alpha</code>'
     );
 });
 
@@ -68,7 +68,7 @@ describe('whenHighlightedWordIsLastToken_thenExpectedCodeGenerated', function ()
     new whenCodeHighlighted(
         '<body><code>alpha in</code></body>'
     ).thenExpectedCodeBuilt(
-        '<code>alpha <span class="blue">in</span></code>'
+        '<code>alpha&nbsp;<span class="blue">in</span></code>'
     );
 });
 
@@ -133,7 +133,7 @@ describe('whenConditionalStatement_thenExpectedCodeGenerated', function () {
     new whenCodeHighlighted(
         '<body><code>    if (modified != 0) {\n</code></body>'
     ).thenExpectedCodeBuilt(
-        '<code>    <span class="blue">if</span> (modified != 0) {\n</code>'
+        '<code>&nbsp;&nbsp;&nbsp;&nbsp;<span class="blue">if</span>&nbsp;(modified&nbsp;!=&nbsp;0)&nbsp;{\n</code>'
     );
 });
 
@@ -182,6 +182,14 @@ describe('whenSingleQuote_thenExpectedCodeGenerated', function () {
         '<body><code>foo\'bar</code></body>'
     ).thenExpectedCodeBuilt(
         '<code>foo\'bar</code>'
+    );
+});
+
+describe('whenDollarSignInMultipleLines_thenExpectedCodeGenerated', function () {
+    new whenCodeHighlighted(
+        '<body><code>$ foo\n$ bar</code></body>'
+    ).thenExpectedCodeBuilt(
+        '<code>$&nbsp;foo\n$&nbsp;bar</code>'
     );
 });
 

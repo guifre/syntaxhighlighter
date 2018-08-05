@@ -1,1 +1,1 @@
-# syntaxhighlighter
+# SyntaxHighlighter [![Build Status](https://travis-ci.org/guifre/notes2html.svg?branch=master)](https://travis-ci.org/guifre/syntaxhighlighter.svg?branch=master) [![Coverage Status](https://coveralls.io/repos/github/guifre/syntaxhighlighter/badge.svg?branch=master)](https://coveralls.io/github/guifre/syntaxhighlighter?branch=master)

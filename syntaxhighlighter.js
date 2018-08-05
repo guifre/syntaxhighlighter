@@ -22,9 +22,9 @@ var Highlighter = class Highlighter {
         constructor()
         {
             this.highlightedKeywords = {
-                "red": ["$", ">", "awk", "aspell", "cron", "gawk", "like", "pro", "rpm", "ssh", "similar", "snort", "top", "alias", "apt", "awk", "bzip2", "cat", "cd", "chmod", "chown", "cmp", "comm", "cp", "cpio", "date", "declare", "df", "echo", "enable", "env", "eval", "exec", "exit", "expect", "export", "find", "for", "free", "ftp", "gawk", "grep", "gzip", "ifconfig", "ifdown", "ifup", "kill", "less", "lft", "ln", "locate", "ls", "man", "mc", "mkdir", "more", "mv", "mysql", "neat", "netconfig", "netstat", "nslookup", "od", "passwd", "ping", "ps", "pwd", "read", "rm", "rsync", "screen", "sdiff", "sed", "shutdown", "slocate", "sort", "ssh", "su", "sudo", "tail", "tar", "top", "tr", "traceroute", "uname", "uniq", "unzip", "vi", "vim", "vmstat", "wc", "wget", "whatis", "whereis", "while", "whoami", "yum"],
-                "blue": ["None", "True", "abstract", "and", "as", "assert", "auto", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "def", "default", "del", "delete", "do", "double", "elif", "else", "enum", "except", "export", "extends", "extern", "false", "final", "finally", "float", "for", "from", "function", "global", "goto", "if", "implements", "import", "in", "inline", "instanceof", "int", "interface", "is", "lambda", "let", "long", "native", "new", "nonlocal", "not", "null", "or", "package", "pass", "private", "protected", "public", "raise", "register", "restrict", "return", "short", "signed", "sizeof", "static", "strictfp", "struct", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typedef", "typeof", "union", "unsigned", "var", "void", "volatile", "while", "with", "yield"],
-                "green": ["in", "is", "up"]
+                "red": ["select","union","order", ">", "awk", "aspell", "cron", "gawk", "like", "pro", "rpm", "ssh", "similar", "snort", "top", "alias", "apt", "awk", "bzip2", "cat", "cd", "chmod", "chown", "cmp", "comm", "cp", "cpio", "date", "declare", "df", "echo", "enable", "env", "eval", "exec", "exit", "expect", "export", "find", "for", "free", "ftp", "gawk", "grep", "gzip", "ifconfig", "ifdown", "ifup", "kill", "less", "lft", "ln", "locate", "ls", "man", "mc", "mkdir", "more", "mv", "mysql", "neat", "netconfig", "netstat", "nslookup", "od", "passwd", "ping", "ps", "pwd", "read", "rm", "rsync", "screen", "sdiff", "sed", "shutdown", "slocate", "sort", "ssh", "su", "sudo", "tail", "tar", "top", "tr", "traceroute", "uname", "uniq", "unzip", "vi", "vim", "vmstat", "wc", "wget", "whatis", "whereis", "while", "whoami", "yum"],
+                "blue": ["null","none","from", "true", "abstract", "and", "as", "assert", "auto", "boolean", "break", "byte", "case", "catch", "char", "class", "const", "continue", "debugger", "def", "default", "del", "delete", "do", "double", "elif", "else", "enum", "except", "export", "extends", "extern", "false", "final", "finally", "float", "for", "from", "function", "global", "goto", "if", "implements", "import", "in", "inline", "instanceof", "int", "interface", "is", "lambda", "let", "long", "native", "new", "nonlocal", "not", "null", "or", "package", "pass", "private", "protected", "public", "raise", "register", "restrict", "return", "short", "signed", "sizeof", "static", "strictfp", "struct", "super", "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "typedef", "typeof", "union", "unsigned", "var", "void", "volatile", "while", "with", "yield"],
+                "green": ["in", "by", "is", "up"]
             };
 
             this.regexes = [
@@ -167,13 +167,16 @@ var Highlighter = class Highlighter {
             {
                 for (var keyword in this.highlightedKeywords[color])
                 {
-                    if (token.node === this.highlightedKeywords[color][keyword])
+                    if (token.node.toLowerCase() === this.highlightedKeywords[color][keyword])
                     {
                         return "<span class='" + color + "'>" + token.node + "</span>";
                     }
                 }
             }
+            if (token.node ===' ')
+            {
+                return '&nbsp;';
+            }
             return token.node;
         }
-    }
-;
+    };
